@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ដំណើរការដឹកជញ្ជូនទំនិញ</title>
+    <style>
+      body {
+        font-family: "Khmer OS", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+        padding: 30px;
+      }
+      h1 {
+        color: #2a7ae2;
+        text-align: center;
+      }
+      .step {
+        background-color: #ffffff;
+        border-left: 5px solid #2a7ae2;
+        margin-bottom: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+      }
+      .step.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .step h2 {
+        margin: 0;
+        font-size: 20px;
+      }
+      .step p {
+        margin: 5px 0 0;
+        font-size: 16px;
+        font-family: Kh Battambang;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>ដំណើរការដឹកជញ្ជូនទំនិញ</h1>
+
+    <div class="step">
+      <h2>1. ការបញ្ជាទិញ</h2>
+      <p>អតិថិជនជ្រើសរើសទំនិញ និងបញ្ចូលទៅក្នុងរទេះបញ្ជាទិញ។</p>
+    </div>
+    <div class="step">
+      <h2>2. ការបញ្ជាក់បញ្ជាទិញ</h2>
+      <p>ប្រព័ន្ធផ្ញើសារបញ្ជាក់ការបញ្ជាទិញទៅអតិថិជន។</p>
+    </div>
+    <div class="step">
+      <h2>3. រៀបចំទំនិញ</h2>
+      <p>បុគ្គលិកឃ្លាំងជ្រើសរើស និងខ្ចប់ទំនិញ។</p>
+    </div>
+    <div class="step">
+      <h2>4. ដឹកជញ្ជូន</h2>
+      <p>ទំនិញត្រូវបានផ្ញើទៅក្រុមហ៊ុនដឹកជញ្ជូនដើម្បីដឹកទៅអតិថិជន។</p>
+    </div>
+    <div class="step">
+      <h2>5. តាមដានការដឹកជញ្ជូន</h2>
+      <p>អតិថិជនអាចប្រើលេខតាមដានដើម្បីមើលដំណើរទំនិញ។</p>
+    </div>
+    <div class="step">
+      <h2>6. ទទួលទំនិញ</h2>
+      <p>អតិថិជនទទួលបានទំនិញ និងអាចផ្តល់មតិឬការវាយតម្លៃ។</p>
+    </div>
+
+    <script>
+      const steps = document.querySelectorAll(".step");
+      steps.forEach((step, index) => {
+        setTimeout(() => {
+          step.classList.add("visible");
+        }, index * 500); // បង្ហាញ step ថ្មីរៀងរាល់ 0.5 វិនាទី
+      });
+    </script>
+  </body>
+</html>

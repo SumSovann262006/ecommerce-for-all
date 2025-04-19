@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="km">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ទំព័រទូទាត់ប្រាក់</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .payment-container {
+        background: #fff;
+        padding: 30px 40px;
+        border-radius: 20px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        max-width: 500px;
+        width: 100%;
+      }
+
+      .payment-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #222;
+        font-weight: 600;
+      }
+
+      .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-bottom: 25px;
+      }
+
+      .method {
+        border: 2px solid transparent;
+        border-radius: 12px;
+        padding: 12px;
+        background: #f9f9f9;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .method img {
+        width: 36px;
+        height: auto;
+        margin-bottom: 6px;
+        pointer-events: none;
+      }
+
+      .method.active {
+        border-color: #4a90e2;
+        background: #e0f3ff;
+      }
+
+      .method:hover {
+        background: #eef6ff;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        font-weight: 500;
+        font-size: 14px;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        border: none;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #00f2fe, #4facfe);
+      }
+
+      .card-fields {
+        display: none;
+      }
+
+      .show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body style="background-color: rgb(0, 0, 81)">
+    <div class="payment-container" style="box-shadow: 0px 0px 4px 4px #333">
+      <h2 style="font-family: Khmer S4; color: purple">
+        ជ្រើសរើសរបៀបបង់ប្រាក់
+      </h2>
+      <img
+        src="image_Project/logo_header.png"
+        alt=""
+        style="
+          width: auto;
+          height: 4rem;
+          position: relative;
+          left: 11rem;
+          bottom: 0.7rem;
+          border-radius: 5px;
+        "
+      />
+      <div class="payment-methods">
+        <div class="method" data-method="visa">
+          <img src="https://img.icons8.com/color/48/visa.png" alt="Visa" />
+          Visa Card
+        </div>
+        <div class="method" data-method="aba">
+          <img
+            src="https://i.pinimg.com/originals/e2/33/f5/e233f5b0c5a358449398f202b03f063a.jpg"
+            alt="ABA"
+            style="width: 40px; border-radius: 10px"
+          />
+          ABA Bank
+        </div>
+        <div class="method" data-method="acleda">
+          <img
+            src="https://www.logotypes101.com/logos/866/3239FCC71995861704E97EBA9E7F0883/acledabank.png"
+            alt="ACLEDA"
+            style="width: 40px; border-radius: 10px"
+          />
+          ACLEDA Bank
+        </div>
+        <div class="method" data-method="wing">
+          <img
+            src="https://play-lh.googleusercontent.com/-deHHbwBUh2I4dzTjq9n4ggBGPqJwKzj9pwvPqyaR-hPxzKN9QVJOBsZP_ShlCDmX60"
+            alt="Wing"
+            style="width: 40px; border-radius: 10px"
+          />
+          Wing Bank
+        </div>
+      </div>
+
+      <form id="paymentForm">
+        <div class="card-fields" id="cardFields">
+          <div class="form-group">
+            <label style="font-family: Khmer S4">ឈ្មោះលើកាត</label>
+            <input type="text" id="cardName" placeholder="Your Name Card" />
+          </div>
+          <div class="form-group">
+            <label style="font-family: Khmer S4">លេខកាត</label>
+            <input
+              type="text"
+              id="cardNumber"
+              placeholder="Numbers card"
+              maxlength="16"
+            />
+          </div>
+          <div class="form-group">
+            <label style="font-family: Khmer S4">ផុតកំណត់ (MM/YY)</label>
+            <input type="text" id="expDate" placeholder="MM/YY" />
+          </div>
+          <div class="form-group">
+            <label>CVV</label>
+            <input type="number" id="cvv" placeholder="123" maxlength="4" />
+          </div>
+        </div>
+
+        <button type="submit" style="font-family: Khmer S4">
+          បង់ប្រាក់ឥឡូវនេះ
+        </button>
+      </form>
+    </div>
+
+    <script>
+      const methods = document.querySelectorAll(".method");
+      const cardFields = document.getElementById("cardFields");
+      let selectedMethod = null;
+
+      methods.forEach((method) => {
+        method.addEventListener("click", () => {
+          methods.forEach((m) => m.classList.remove("active"));
+          method.classList.add("active");
+          selectedMethod = method.getAttribute("data-method");
+
+          // Show card fields for all payment methods
+          cardFields.classList.add("show");
+        });
+      });
+
+      const form = document.getElementById("paymentForm");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (!selectedMethod) {
+          alert("សូមជ្រើសរើសរបៀបបង់ប្រាក់ជាមុនសិន!");
+          return;
+        }
+
+        const name = document.getElementById("cardName").value;
+        const number = document.getElementById("cardNumber").value;
+        const exp = document.getElementById("expDate").value;
+        const cvv = document.getElementById("cvv").value;
+
+        if (!name || !number || !exp || !cvv) {
+          alert("សូមបំពេញព័ត៌មានកាតឱ្យគ្រប់!");
+          return;
+        }
+
+        const message = `✅ បង់ប្រាក់ដោយ ${selectedMethod.toUpperCase()}\nឈ្មោះ: ${name}\nលេខកាត: ${number}\nផុតកំណត់: ${exp}\nCVV: ${cvv}`;
+        alert(message);
+      });
+    </script>
+  </body>
+</html>

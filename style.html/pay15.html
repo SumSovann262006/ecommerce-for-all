@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Book Product Page</title>
+    <!-- Bootstrap CSS from CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- AOS CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        margin: auto;
+        padding: 20px;
+      }
+
+      .product-page {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .left-column img {
+        max-width: 300px;
+        height: auto;
+      }
+
+      .right-column {
+        flex: 1;
+      }
+
+      .right-column h2 {
+        margin-top: 0;
+      }
+
+      .price {
+        font-size: 1.5em;
+        color: #444;
+        margin: 10px 0;
+      }
+
+      .description {
+        margin: 15px 0;
+      }
+
+      select {
+        margin: 10px 0;
+        padding: 8px;
+        width: 200px;
+      }
+
+      .quantity-add {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .quantity-add input {
+        width: 40px;
+        text-align: center;
+      }
+
+      .add-to-cart {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .actions a {
+        margin-right: 20px;
+        text-decoration: none;
+        color: #666;
+      }
+
+      .sidebar {
+        width: 250px;
+      }
+
+      .suggestions {
+        margin-bottom: 20px;
+      }
+
+      .suggestion-item {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .suggestion-item img {
+        width: 50px;
+        height: 70px;
+        object-fit: cover;
+      }
+
+      .info-box {
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+      }
+
+      .info-box p {
+        margin: 10px 0;
+      }
+      .button1 > button {
+        align-items: center;
+        background-image: linear-gradient(
+          144deg,
+          #af40ff,
+          #5b42f3 50%,
+          #00ddeb
+        );
+        border: 0;
+        border-radius: 8px;
+        box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+        box-sizing: border-box;
+        color: #ffffff;
+        display: flex;
+        font-size: 18px;
+        justify-content: center;
+        line-height: 1em;
+        max-width: 100%;
+        min-width: 140px;
+        padding: 3px;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.3s;
+        position: relative;
+        left: 3rem;
+      }
+
+      .button1 > button:active,
+      .button1 > button:hover {
+        outline: 0;
+      }
+
+      .button1 > button span {
+        background-color: rgb(5, 6, 45);
+        padding: 16px 24px;
+        border-radius: 6px;
+        width: 100%;
+        height: 100%;
+        transition: 300ms;
+      }
+
+      .button1 > button:hover span {
+        background: none;
+      }
+
+      .button1 > button:active {
+        transform: scale(0.9);
+      }
+      /* From Uiverse.io by kamehame-ha */
+      .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .cards .red {
+        background-color: #f43f5e;
+      }
+
+      .cards .blue {
+        background-color: #3b82f6;
+      }
+
+      .cards .green {
+        background-color: #22c55e;
+      }
+
+      .cards .card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        height: 100px;
+        width: 250px;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+        transition: 400ms;
+      }
+
+      .cards .card p.tip {
+        font-size: 1em;
+        font-weight: 700;
+      }
+
+      .cards .card p.second-text {
+        font-size: 0.7em;
+      }
+
+      .cards .card:hover {
+        transform: scale(1.1, 1.1);
+      }
+
+      .cards:hover > .card:not(:hover) {
+        filter: blur(10px);
+        transform: scale(0.9, 0.9);
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light shadow-sm"
+      style="
+        background-color: #053262;
+        position: sticky;
+        top: 0px;
+        left: 0rem;
+        z-index: 1;
+        height: 7rem;
+      "
+    >
+      <div class="container">
+        <a class="navbar-brand">
+          <img
+            src="../image_Project/logo_header.png"
+            alt="Logo"
+            style="
+              width: 80px;
+              height: 80px;
+              border-radius: 10px;
+              position: relative;
+              bottom: 0.7rem;
+            "
+          />
+        </a>
+        <button
+          class="navbar-toggler position-relative left-10"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse m-lg-4" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link active text-light"
+                href="#"
+                style="font-family: Ang Tasom; font-size: 19px"
+                >ទំព័រដើម</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="#"
+                style="font-family: Ang Tasom; font-size: 19px"
+                >អំពីយើង</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="#"
+                style="font-family: Ang Tasom; font-size: 19px"
+                >លក្ខណ្ឌ</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-light"
+                href="#"
+                style="font-family: Ang Tasom; font-size: 19px"
+                >អភិបាលកិច្ច</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle text-light"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="font-family: Ang Tasom; font-size: 19px"
+              >
+                ប្រភេទផលិតផល
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">ចំណេះដឹងទូទៅ</a></li>
+                <li><a class="dropdown-item" href="#">ភាពជាអ្នកដឹកនាំ</a></li>
+                <li><a class="dropdown-item" href="#">ប្រលោមលោក</a></li>
+                <li><a class="dropdown-item" href="#">ជំនួញ</a></li>
+                <li><a class="dropdown-item" href="#">កម្សាន្ត</a></li>
+                <li><a class="dropdown-item" href="#">ភាសាអង់គ្លេស</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">ស្វែងរកបន្ថែម</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <form
+            class="d-flex input-group w-50"
+            style="
+              position: relative;
+              left: 4rem;
+              position: relative;
+              bottom: 0.7rem;
+            "
+          >
+            <input
+              type="text"
+              class="form-control rounded-start-pill border-primary shadow-sm w-50"
+              placeholder="ស្វែងរកផលិតផល..."
+              aria-label="Search"
+              style="height: 2.8rem; font-family: Kh Battambang"
+            />
+            <button
+              class="btn btn-primary rounded-end-pill px-4 shadow-sm"
+              type="submit"
+            >
+              <i class="fas fa-search"></i> ស្វែងរក
+            </button>
+          </form>
+        </div>
+        <i
+          class="fa-solid fa-cart-shopping d-none d-md-block"
+          style="
+            color: white;
+            font-size: 25px;
+            position: relative;
+            left: 4rem;
+            position: relative;
+            bottom: 0.7rem;
+          "
+        ></i>
+        <!-- From Uiverse.io by cssbuttons-io -->
+        <div
+          class="button1 d-none d-md-block"
+          style="
+            position: relative;
+            left: 2rem;
+            position: relative;
+            bottom: 0.7rem;
+          "
+        >
+          <button>
+            <span class="text"
+              ><a
+                href="form in project.html"
+                style="font-size: 22px; text-decoration: none; color: white"
+                >Login</a
+              ></span
+            >
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="product-page">
+        <div class="left-column">
+          <img src="../image_Project/book15.png" alt="Book Cover" />
+        </div>
+        <div class="right-column">
+          <h2 style="font-family: Khmer S4">ដំណើរស្វែងរកខ្លួនឯង</h2>
+          <p class="author" style="font-family: Khmer S4">
+            អ្នកនិពន្ធ៖ <strong>លោក ឡាំ លីម</strong>
+          </p>
+          <p class="price">36000៛ – 40000៛</p>
+          <p class="description" style="font-family: kh Battambang">
+            គន្លឹះដើម្បីមានភាពរីករាយគឺការមានក្ដីស្រម៉ៃ
+            រីឯគន្លឹះដើម្បីទទួលបានជោគជ័យ<br />គឺការធ្វើឪ្យក្ដីស្រម៉ៃក្លាយជាការពិត.
+          </p>
+
+          <label for="format" style="font-family: Khmer Kep"
+            >មធ្យោបាយទូទាត់ប្រាក់</label
+          >
+          <select id="format">
+            <option>VISA</option>
+            <option>ABA</option>
+            <option>ACLEDA</option>
+            <option>WING</option>
+          </select>
+
+          <div class="quantity-add">
+            <button>-</button>
+            <input type="text" value="1" style="width: 6rem" />
+            <button>+</button>
+            <a href="lak.html"
+              ><button class="add-to-cart">Add to card</button></a
+            >
+          </div>
+
+          <div class="actions">
+            <a href="#">Add to wishlist</a>
+            <a href="#">Share</a>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <div class="suggestions">
+            <div class="suggestion-item">
+              <a href="#">
+                <img src="../image_Project/book19.png" alt="" />
+              </a>
+              <p style="font-family: Khmer S4">
+                ១០៨​​ ចក្ខុវិស័យ គួច ម៉េងលី<br /><strong>36000៛</strong><br />
+                លោក គួច ម៉េងលី
+              </p>
+            </div>
+            <div class="suggestion-item">
+              <a href="#">
+                <img src="../image_Project/book14.png" alt="" />
+              </a>
+              <p style="font-family: Khmer S4">
+                ជូនព្រលឹងមេដឹកនាំ<br /><strong>36000៛</strong><br />លោក ឡាំ លីម
+              </p>
+            </div>
+            <div class="suggestion-item">
+              <a href="#">
+                <img src="../image_Project/book11.png" alt="" />
+              </a>
+              <p style="font-family: Khmer S4">
+                រស់ដោយប្រាជ្ញា ភាគ២<br /><strong>36000៛</strong><br />លោក អួន
+                សារ៉ាត
+              </p>
+            </div>
+          </div>
+
+          <div class="info-box">
+            <p style="font-family: Khmer S4">
+              <strong>Free Delivery</strong><br />សម្រាប់ការទិញសៀវភៅលើស $50
+            </p>
+            <p><strong>Secure Payment</strong><br />100% Secure Payment</p>
+          </div>
+          <!-- From Uiverse.io by kamehame-ha -->
+          <div class="cards">
+            <a
+              href="#"
+              style="text-decoration: none; font-family: kh Battambang"
+            >
+              <div class="card red">
+                <p class="tip">បញ្ជាក់អាសយដ្ឋាន</p>
+                <p class="second-text">បញ្ចូលទីតាំងរបស់អ្នក</p>
+              </div>
+            </a>
+            <a
+              href="#"
+              style="text-decoration: none; font-family: kh Battambang"
+            >
+              <div class="card blue">
+                <p class="tip">មធ្យោបាយដឹកជញ្ជូន</p>
+                <p class="second-text">បញ្ជាក់ពីមធ្យោបាយដឹកជញ្ជូនរបស់អ្នក</p>
+              </div>
+            </a>
+            <a
+              href="#"
+              style="text-decoration: none; font-family: kh Battambang"
+            >
+              <div class="card green">
+                <p class="tip">បញ្ជាក់ចំនួនទំនិញរបស់អ្នក</p>
+                <p class="second-text">បញ្ជាក់ចំនួនទំនិញរបស់អ្នកដែលបានទិញ</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="bg-dark text-light pt-5 pb-3 mt-5">
+      <div class="container">
+        <div class="row">
+          <!-- Contact Info -->
+          <div class="col-md-3 mb-4">
+            <h5 style="font-family: Khmer CN Kam Rieng; font-size: 25px">
+              ទំនាក់ទំនង
+            </h5>
+            <p>អ៊ីមែល: sumsovann400@gmail.com</p>
+            <p>ទូរស័ព្ទ: 071 74 33 912</p>
+          </div>
+
+          <!-- Social Media -->
+          <div class="col-md-3 mb-4">
+            <h5 style="font-family: Khmer CN Kam Rieng; font-size: 25px">
+              បណ្តាញសង្គម
+            </h5>
+            <ul class="list-unstyled m-2">
+              <li>
+                <a
+                  href="https://facebook.com"
+                  class="text-decoration-none text-light"
+                  ><i
+                    class="fa-brands fa-facebook"
+                    style="
+                      position: relative;
+                      right: 0.5rem;
+                      color: blue;
+                      font-size: 25px;
+                    "
+                  ></i
+                  >Facebook</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://instagram.com"
+                  class="text-decoration-none text-light"
+                  ><i
+                    class="fa-brands fa-telegram"
+                    style="
+                      position: relative;
+                      right: 0.5rem;
+                      color: rgb(2, 2, 153);
+                      font-size: 25px;
+                    "
+                  ></i
+                  >Telegram</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://youtube.com"
+                  class="text-decoration-none text-light"
+                  ><i
+                    class="fa-brands fa-square-instagram"
+                    style="
+                      position: relative;
+                      right: 0.5rem;
+                      color: rgb(230, 137, 153);
+                      font-size: 25px;
+                    "
+                  ></i
+                  >Instagram</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Policy Links -->
+          <div class="col-md-3 mb-4">
+            <h5 style="font-family: Khmer CN Kam Rieng; font-size: 25px">
+              គោលការណ៍
+            </h5>
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  href="#"
+                  class="text-decoration-none text-light"
+                  style="font-family: kh Battambang"
+                  >គោលការណ៍ឯកជនភាព</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-decoration-none text-light"
+                  style="font-family: kh Battambang"
+                  >លក្ខខណ្ឌប្រើប្រាស់</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Payment Icons -->
+          <div class="col-md-3 mb-4">
+            <h5 style="font-family: Khmer CN Kam Rieng; font-size: 25px">
+              ទូទាត់ប្រាក់
+            </h5>
+            <a href="#">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png"
+                alt="Visa"
+                width="50"
+                class="me-2 mb-2"
+              />
+            </a>
+            <a href="#"
+              ><i
+                class="fa-brands fa-cc-apple-pay"
+                style="color: white; font-size: 30px"
+              ></i
+            ></a>
+
+            <a href="#"
+              ><i
+                class="fa-brands fa-cc-paypal"
+                style="color: white; font-size: 30px"
+              ></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="text-center border-top border-secondary pt-3 mt-4">
+          <p class="mb-0">© 2025 Company SUM SOAVNN រក្សាសិទ្ធិគ្រប់យ៉ាង។</p>
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
